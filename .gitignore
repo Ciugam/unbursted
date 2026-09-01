@@ -1,0 +1,8 @@
+*.hdf5
+*.asc
+*.ipynb_checkpoints
+*.spc
+*.set
+*.npz
+*.sdt
+*.xlsx
