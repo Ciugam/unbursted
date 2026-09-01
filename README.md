@@ -41,7 +41,7 @@ traces saved to `Pybromo_simulations/` (*.hdf5).
 - Timing: t_step = 5 µs (free only) / 1 µs (mixtures), t_max = 1–60 s
 
 ### Phase 2 — Timestamp generation
-Notebook `2_SIM_timestamps_gen.ipynb` (**to be done**). Converts emission
+Notebook `2_SIM_timestamps_gen.ipynb` (done). Converts Phase 1 emission
 traces into photon arrival timestamps, saved to `Pybromo_timestamps/` (*.hdf5).
 
 ### Phase 3 — Data analysis
@@ -56,7 +56,7 @@ Notebook `3_ANALYSIS.ipynb` (**to be done**).
 
     unbursted/
     ├── 1_SIM_brownian_motion.ipynb    # Phase 1: Brownian motion simulation ✓
-    ├── 2_SIM_timestamps_gen.ipynb     # Phase 2: timestamp generation (to be done)
+    ├── 2_SIM_timestamps_gen.ipynb     # Phase 2: timestamp generation ✓
     ├── 3_ANALYSIS.ipynb               # Phase 3: data analysis (to be done)
     ├── Pybromo_simulations/           # Phase 1 output (emission traces, *.hdf5)
     ├── Pybromo_timestamps/            # Phase 2 output (timestamps, *.hdf5)
