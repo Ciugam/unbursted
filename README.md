@@ -33,16 +33,20 @@ traces saved to `Pybromo_simulations/` (*.hdf5).
 - Box: 5 × 5 × 10 µm (reflective boundaries)
 - PSF: 3D Gaussian, w0 = 0.25 µm, z0 = 1.0 µm (ellipsoid confocal volume)
 - Free EtBr: D = 425 µm²/s
-- DNA-bound EtBr: D = 122 µm²/s
-- n_avg = 1 molecule in the confocal volume; bound fractions simulated:
-  0 (free only), 0.004, 0.00905, 0.0947
+- DNA-bound EtBr modelled as whole DNA blobs (coils): D = 1 µm²/s
+- n_avg = 1 free molecule in the confocal volume; blob populations
+  simulated: 0 (free only), 0.12 and 0.18 blobs in the confocal volume
 - Absolute particle count in the box derived from volume/concentration:
-  N_box = n_avg · (V_box / V_conf), rounded to nearest integer
-- Timing: t_step = 5 µs (free only) / 1 µs (mixtures), t_max = 1–60 s
+  N_box = n_avg · (V_box / V_conf); for blobs, at least one is always
+  generated (N_blobs = max(1, int(n_avg_bound · V_box / V_conf)))
+- Timing: t_step = 5 µs, t_max = 60 s (all runs)
 
 ### Phase 2 — Timestamp generation
 Notebook `2_SIM_timestamps_gen.ipynb` (done). Converts Phase 1 emission
 traces into photon arrival timestamps, saved to `Pybromo_timestamps/` (*.hdf5).
+
+- Emission rates (identical across all runs): max_rate_free = 600 cps,
+  max_rate_dna = 24000 cps, background = 275 + 2400 cps
 
 ### Phase 3 — Data analysis
 Notebook `3_ANALYSIS.ipynb` (**to be done**).
@@ -72,16 +76,17 @@ Real data: files are named `SolXX_mY.asc` (run Sol01, 03, 05, 14; detector
 m1/m2); both detectors acquire simultaneously in every run.
 
 Simulation files embed the main specs in the name, e.g.
-`pybromo_…_P954_D4.2e-10_6336pM_step1.0us_t_max1.0s_ID0-0.hdf5`
-(P = particle count, D = diffusion coefficient in m²/s, step/t_max = time
-binning, ID = chunk index).
+`pybromo_…_P954_D4.2e-10_P114_D1e-12_7093pM_step5.0us_t_max60.0s_ID0-0.hdf5`
+(P/D = particle count and diffusion coefficient in m²/s per population,
+concentration in pM, step/t_max = time binning, ID = chunk index).
 
 ## Open items
 
 - Revisit the absolute number of simulated EtBr–DNA: bound EtBr belongs to DNA
-  strands; derive the base-pair:EtBr factor
-- Fix max_rate / background sweet spot across all simulations and align
-  timestamp histogram binning with the experimental one
+  strands. Blobs now diffuse as single particles, but each blob should carry
+  many EtBr molecules (cluster of emitters) to reproduce realistic burst
+  amplitudes; D = 1 µm²/s still to be validated against burst durations
+- Align timestamp histogram binning with the experimental one
 - Validate: simulated vs experimental mean count rate (free case) and burst
   count rate (bound case)
 - Implement and validate the threshold method (N_free, τ_d recovery)
