@@ -49,19 +49,24 @@ traces into photon arrival timestamps, saved to `Pybromo_timestamps/` (*.hdf5).
   max_rate_dna = 24000 cps, background = 275 + 2400 cps
 
 ### Phase 3 — Data analysis
-Notebook `3_ANALYSIS.ipynb` (**to be done**).
-- Autocorrelation of simulated timestamps (no afterpulse → no cross-correlation
-  needed), 1-species fit, compare N and diffusion time vs input values
+Notebook `3_ANALYSIS.ipynb` (**done**).
+- Autocorrelation of simulated timestamps, 1-species and double-population fits, compare N and diffusion time vs input values
 - Cross-correlation of real data (detectors m1 & m2), 1-species fit
-- Threshold method: sweep threshold level and pre/post-burst removal time;
-  refit the surviving trace to recover N_free and τ_d
+- Threshold method implemented: median + k·MAD threshold with margin_bins sweep
+- Centralized diffusion/fit functions in `toolkit.py`: diffusion_3d_single/double/single_offset, fit_G
+- Validation sections for Free EtBr reference, EtBr-DNA 0.06 blobs Sol03 vs ac470b, EtBr-DNA 0.08 blobs Sol05 vs 00512f
+- DataFrame summaries for Real vs Sim with τ_diff, D, A0_free, N_eff
+- k-sweep plots and photons remaining vs margin_bins for k=0.5/1.0/1.5
+- Unified English summary with tables and polydispersity note
+- Sweet spot chosen: k=1.0, margin=0 for both DNA concentrations
 
 ## Repository structure
 
     unbursted/
     ├── 1_SIM_brownian_motion.ipynb    # Phase 1: Brownian motion simulation ✓
     ├── 2_SIM_timestamps_gen.ipynb     # Phase 2: timestamp generation ✓
-    ├── 3_ANALYSIS.ipynb               # Phase 3: data analysis (to be done)
+    ├── 3_ANALYSIS.ipynb               # Phase 3: data analysis ✓
+    ├── toolkit.py                     # Centralized diffusion/fit functions
     ├── Pybromo_simulations/           # Phase 1 output (emission traces, *.hdf5)
     ├── Pybromo_timestamps/            # Phase 2 output (timestamps, *.hdf5)
     ├── Real_data/                     # Experimental data (.asc)
@@ -82,15 +87,11 @@ concentration in pM, step/t_max = time binning, ID = chunk index).
 
 ## Open items
 
-- Revisit the absolute number of simulated EtBr–DNA: bound EtBr belongs to DNA
-  strands. Blobs now diffuse as single particles, but each blob should carry
-  many EtBr molecules (cluster of emitters) to reproduce realistic burst
-  amplitudes; D = 1 µm²/s still to be validated against burst durations
-- Align timestamp histogram binning with the experimental one
-- Validate: simulated vs experimental mean count rate (free case) and burst
-  count rate (bound case)
-- Implement and validate the threshold method (N_free, τ_d recovery)
-- (If time) apply the threshold method to the 4 experimental runs
+- Revisit absolute number of simulated EtBr–DNA: bound EtBr belongs to DNA strands. Blobs now diffuse as single particles, but each blob should carry many EtBr molecules to reproduce realistic burst amplitudes; D = 1 µm²/s still to be validated against burst durations
+- Align timestamp histogram binning with the experimental one for all runs
+- Quantitative error analysis of threshold choice and systematic uncertainty on k
+- Test monodisperse DNA solutions to reduce polydispersity noise mixing with free EtBr signal
+- Extend validation to Sol14 run
 
 ## Author
 
