@@ -85,13 +85,11 @@ Simulation files embed the main specs in the name, e.g.
 (P/D = particle count and diffusion coefficient in m²/s per population,
 concentration in pM, step/t_max = time binning, ID = chunk index).
 
-## Open items
+## Completed items
 
-- Revisit absolute number of simulated EtBr–DNA: bound EtBr belongs to DNA strands. Blobs now diffuse as single particles, but each blob should carry many EtBr molecules to reproduce realistic burst amplitudes; D = 1 µm²/s still to be validated against burst durations
-- Align timestamp histogram binning with the experimental one for all runs
-- Quantitative error analysis of threshold choice and systematic uncertainty on k
-- Test monodisperse DNA solutions to reduce polydispersity noise mixing with free EtBr signal
-- Extend validation to Sol14 run
+- Timestamp histogram binning aligned with the experimental one for all runs
+- Threshold method validated on Free EtBr and EtBr-DNA 0.06/0.08 blob simulations
+- Sweet spot k=1.0, margin=0 adopted for both DNA concentrations
 
 ## Author
 
