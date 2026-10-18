@@ -161,17 +161,17 @@ def fit_G(tau, G, guesses, bounds, model="single", tau_min=0, label="", sigma=No
     sigma_m = sigma[mask] if sigma is not None else None
     if model == "single":
         func = diffusion_3d_single
-        popt, pcov = curve_fit(func, tau[mask], G[mask], p0=guesses, bounds=bounds, sigma=sigma_m, absolute_sigma=False)
+        popt, pcov = curve_fit(func, tau[mask], G[mask], p0=guesses, bounds=bounds, sigma=sigma_m, absolute_sigma=True)
         if verbose:
             print(f"[{label}] tau_diff = {popt[0]:.4g} s   A0 = {popt[1]:.4g}")
     elif model == "single_offset":
         func = diffusion_3d_single_offset
-        popt, pcov = curve_fit(func, tau[mask], G[mask], p0=guesses, bounds=bounds, sigma=sigma_m, absolute_sigma=False)
+        popt, pcov = curve_fit(func, tau[mask], G[mask], p0=guesses, bounds=bounds, sigma=sigma_m, absolute_sigma=True)
         if verbose:
             print(f"[{label}] tau_diff = {popt[0]:.4g} s   A0 = {popt[1]:.4g}   C = {popt[2]:.4g}")
     elif model == "double":
         func = diffusion_3d_double
-        popt, pcov = curve_fit(func, tau[mask], G[mask], p0=guesses, bounds=bounds, sigma=sigma_m, absolute_sigma=False)
+        popt, pcov = curve_fit(func, tau[mask], G[mask], p0=guesses, bounds=bounds, sigma=sigma_m, absolute_sigma=True)
         if verbose:
             print(f"[{label}] tau1 = {popt[0]:.4g} s  A0_1 = {popt[1]:.4g}"
                   f"   tau2 = {popt[2]:.4g} s  A0_2 = {popt[3]:.4g}")
