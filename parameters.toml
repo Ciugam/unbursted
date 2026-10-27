@@ -1,0 +1,25 @@
+[box]                    # box geometry (m)
+x1 = -1.0e-6
+x2 = +1.0e-6
+y1 = -1.0e-6
+y2 = +1.0e-6
+z1 = -2.0e-6
+z2 = +2.0e-6
+
+[PSF]                   # focused spot (m)
+w0_eff = 0.30e-6        # effective waist
+z0_eff = 1.20e-6        # focal plane
+
+[simulation]            # time parameters (s)
+t_step = 1e-6           # time step
+t_max  = 120            # total simulation time
+
+[particles]             # species and diffusivities
+D_etbr_free      = 425.0 # diffusivity (um^2/s)
+D_etbr_dna       = 0.5   # diffusivity (um^2/s)
+n_etbr_free      = 100   # free EtBr particles
+n_etbr_dna_006   = 6     # EtBr-DNA complexes (006)
+n_etbr_dna_008   = 8     # EtBr-DNA complexes (008)
+n_etbr_dna_010   = 10    # EtBr-DNA complexes (010)
+n_etbr_dna_012   = 12    # EtBr-DNA complexes (012)
+n_etbr_dna_015   = 15    # EtBr-DNA complexes (015)
